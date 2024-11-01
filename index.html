@@ -92,6 +92,13 @@
             color: blue;
             text-decoration: underline;
         }
+
+        .contact-button-container {
+            display: flex; 
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc nếu cần */
+            margin: 20px 0; /* Thêm khoảng cách giữa các phần */
+        }
     </style>
 </head>
 <body>
@@ -166,11 +173,15 @@
         </section>
     </main>
 
-    <footer id="contact">
+    <footer id="contact" style="display: none;">
         <h2>Liên Hệ</h2>
         <p>Email: dinhphucdong2006@gmail.com</p>
-        <p>Số điện thoại: 0868525JQk</p>
+        <p>Số điện thoại: 0868525JQK</p>
     </footer>
+    <div class="contact-button-container">
+        <button id="show-contact" style="display: none;" onclick="showContact()">Click here to contact</button>
+    </div>
+    
 
     <script>
         // Hiện thị form đăng nhập khi trang được tải
@@ -239,6 +250,27 @@
                 alert('Đã thêm sản phẩm vào giỏ hàng!');
             });
         });
+        function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+
+    const storedPassword = localStorage.getItem(username);
+
+    if (storedPassword && storedPassword === password) {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('show-contact').style.display = 'block'; // Hiện nút "Liên Hệ"
+    } else {
+        errorMessage.textContent = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
+    }
+}
+
+function showContact() {
+    document.getElementById('contact').style.display = 'block';
+    document.getElementById('show-contact').style.display = 'none'; // Ẩn nút sau khi hiển thị thông tin
+}
+
     </script>
 </body>
 </html>
