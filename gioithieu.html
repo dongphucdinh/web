@@ -3,69 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đinh Phúc Đông</title>
+    <title>Cửa Hàng Bánh và Đồ Lưu Niệm</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f2f2f2;
             padding: 20px;
-            background-image: url('https://c4.wallpaperflare.com/wallpaper/534/450/526/wlop-ghost-blade-hd-wallpaper-preview.jpg'); /* Đường dẫn đến ảnh nền */
-            background-size: cover; 
-            background-position: center; 
+            text-align: center;
         }
-        h1 {
-            color: #fff; 
-        }
-        .contact-info, .about-me, .hobbies-section, .footer {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 10px 0;
-            color: #fff
-        }
-        .hobbies {
+
+        nav ul {
             list-style-type: none;
             padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            display: inline-block;
+            width: 200px;
+        }
+
+        .product img {
+            width: 100px;
+            height: 100px;
+        }
+        .product-container {
+    display: flex;
+    justify-content: center; /* Căn giữa các sản phẩm */
+    margin: 20px 0; /* Thêm khoảng cách giữa các phần */
+}
+
+
+        footer {
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* CSS cho phần đăng nhập và đăng ký */
+        #login-form, #register-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .form-container input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+        }
+
+        #toggle-form {
+            margin-top: 15px;
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .contact-button-container {
+            display: flex; 
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc nếu cần */
+            margin: 20px 0; /* Thêm khoảng cách giữa các phần */
         }
     </style>
 </head>
 <body>
-    <h1>Test!</h1>
-    
-    <div class="contact-info">
-        <h2>Info</h2>
-        <p>Tên: Đinh Phúc Đông</p>
-        <p>Tuổi: 18</p>
-        <p>Email: gnodnorthside@gmail.com</p>
-        <p>Số điện thoại: 0868525723</p>
-        <label for="gender">Gioi tinh:</label>
-        <select id="gender" name="Giới tính">
-            <option value="male">Nam</option>
-            <option value="female">Nu</option>
-        </select>
-        <label for="location">Vị trí:</label>
-        <select id="location" name="location">
-            <option value="vietnam">Việt Nam</option>
-            <option value="japan">Nhật Bản</option>
-            <option value="usa">Hoa Kỳ</option>
-            <option value="france">Pháp</option>
-        </select>
-    
-    <div class="about-me">
-        <h2>Introduce</h2>
-        <p>Ko co gi`</p>
-    </div>
-    
-    <div class="hobbies-section">
-        <h2>Hobby</h2>
-        <ul class="hobbies">
-            <li>Dell co</li>
-        </ul>
+    <!-- Phần đăng nhập -->
+    <div id="login-form">
+        <div class="form-container">
+            <h2>Đăng Nhập</h2>
+            <input type="text" id="username" placeholder="Tên đăng nhập">
+            <input type="password" id="password" placeholder="Mật khẩu">
+            <button onclick="login()">Đăng Nhập</button>
+            <p id="error-message" style="color: red;"></p>
+            <p id="toggle-form" onclick="toggleForms()">Chưa có tài khoản? Đăng ký ngay!</p>
+        </div>
     </div>
 
-    <div class="footer">
-        <p>Thank u</p>
+    <!-- Phần đăng ký -->
+    <div id="register-form">
+        <div class="form-container">
+            <h2>Đăng Ký Tài Khoản</h2>
+            <input type="text" id="new-username" placeholder="Tên đăng nhập">
+            <input type="password" id="new-password" placeholder="Mật khẩu">
+            <input type="password" id="confirm-password" placeholder="Xác nhận mật khẩu">
+            <button onclick="register()">Đăng Ký</button>
+            <p id="register-error-message" style="color: red;"></p>
+            <p id="toggle-form" onclick="toggleForms()">Đã có tài khoản? Đăng nhập ngay!</p>
+        </div>
     </div>
+
+    <header>
+        <h1>Cửa Hàng Bánh và Đồ Lưu Niệm</h1>
+        <nav>
+            <ul>
+                <li><a href="#banh">Bánh</a></li>
+                <li><a href="#luu-niem">Đồ Lưu Niệm</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" style="display: none;">
+        <section id="banh">
+            <div class="product-container">
+                <h2>Bánh</h2>
+            <div class="product">
+                <img src="https://static.hawonkoo.vn/hwks1/images/2023/07/cach-lam-banh-bong-lan-6.jpg" alt="Bánh 1">
+                <h3>Bánh Bông Lan</h3>
+                <p>Giá: 30,000 VNĐ</p>
+                <button>Thêm vào giỏ</button>
+            </div>
+            <div class="product">
+                <img src="https://cdn.tgdd.vn/Files/2022/11/25/1489887/keo-giang-sinh-y-nghia-cach-lam-4-loai-keo-noel-don-gian-202211250657323158.jpg" alt="Bánh 2">
+                <h3>Bánh Kẹo</h3>
+                <p>Giá: 25,000 VNĐ</p>
+                <button>Thêm vào giỏ</button>
+            </div>
+        </section>
+
+        <section id="luu-niem">
+            <div class="product-container">
+            <h2>Đồ Lưu Niệm</h2>
+            <div class="product">
+                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/421/557/products/95926250aa67c4e25e76f6e8094dbc20-jpeg.jpg?v=1650624878997" alt="Đồ Lưu Niệm 1">
+                <h3>Gương Hình Tròn</h3>
+                <p>Giá: 50,000 VNĐ</p>
+                <button>Thêm vào giỏ</button>
+            </div>
+            <div class="product">
+                <img src="https://product.hstatic.net/200000287353/product/mockhoa_noel_2023_web_6_f29c11c07beb4ba7bc78c0e7193b9409_master.jpg" alt="Đồ Lưu Niệm 2">
+                <h3>Móc Khóa</h3>
+                <p>Giá: 15,000 VNĐ</p>
+                <button>Thêm vào giỏ</button>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" style="display: none;">
+        <h2>Liên Hệ</h2>
+        <p>Email: dinhphucdong2006@gmail.com</p>
+        <p>Số điện thoại: 0868525JQK</p>
+    </footer>
+    <div class="contact-button-container"></div>
+    <button id="show-contact" style="display: none;" onclick="showContact()">Click here to contact</button>
+</div>
+    
+
+    <script>
+        // Hiện thị form đăng nhập khi trang được tải
+        window.onload = function() {
+            document.getElementById('login-form').style.display = 'flex';
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Lấy thông tin tài khoản từ localStorage
+            const storedPassword = localStorage.getItem(username);
+
+            // Kiểm tra thông tin đăng nhập
+            if (storedPassword && storedPassword === password) {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                errorMessage.textContent = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
+            }
+        }
+
+        function register() {
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const registerErrorMessage = document.getElementById('register-error-message');
+
+            // Kiểm tra thông tin đăng ký
+            if (newPassword !== confirmPassword) {
+                registerErrorMessage.textContent = 'Mật khẩu xác nhận không khớp.';
+            } else if (newUsername === '' || newPassword === '') {
+                registerErrorMessage.textContent = 'Vui lòng điền đầy đủ thông tin.';
+            } else if (localStorage.getItem(newUsername)) {
+                registerErrorMessage.textContent = 'Tên đăng nhập đã tồn tại.';
+            } else {
+                // Lưu thông tin tài khoản vào localStorage
+                localStorage.setItem(newUsername, newPassword);
+                registerErrorMessage.textContent = 'Đăng ký thành công! Bạn có thể đăng nhập.';
+                // Đặt lại các trường
+                document.getElementById('new-username').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-password').value = '';
+                // Chuyển đến form đăng nhập
+                toggleForms();
+            }
+        }
+
+        function toggleForms() {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'flex';
+                registerForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'flex';
+            }
+        }
+
+        // Xử lý sự kiện khi nhấn nút "Thêm vào giỏ"
+        document.querySelectorAll('.product button').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Đã thêm sản phẩm vào giỏ hàng!');
+            });
+        });
+        function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+
+    const storedPassword = localStorage.getItem(username);
+
+    if (storedPassword && storedPassword === password) {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('show-contact').style.display = 'block'; // Hiện nút "Liên Hệ"
+    } else {
+        errorMessage.textContent = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
+    }
+}
+
+function showContact() {
+    document.getElementById('contact').style.display = 'block';
+    document.getElementById('show-contact').style.display = 'none'; // Ẩn nút sau khi hiển thị thông tin
+}
+
+    </script>
 </body>
 </html>
